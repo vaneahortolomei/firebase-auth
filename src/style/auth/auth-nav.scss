@@ -1,0 +1,9 @@
+.auth-nav {
+    list-style-type: none;
+    &__item {
+        text-align: center;
+    }
+    &__button {
+        padding: 0;
+    }
+}
