@@ -1,0 +1,88 @@
+@import "container/index";
+@import "buttons/index";
+
+:root {
+    //font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    --white-color: #ffffff;
+    --green-color: #42b6a4;
+    --yellow-color: #ffe388;
+    --red-color: #e9504f;
+    --brown-color: #775f41;
+    --black-color: #646464;
+    --gray-color: #646464;
+    --second-color: #f6f7fb;
+    --text-color: #000832;
+    --second-text-color: #4e5370;
+    --violet-color: #ecedff;
+    --violet-color-hover: #b8bbe3;
+    --blue-color: #0020c1;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: normal;
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--white-color);
+    transition: color 0.5s, background-color 0.5s;
+    line-height: 1.6;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
+    font-size: 16px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+}
+
+button:focus,
+button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.wrapper {
+    min-height: 100vh;
+    word-break: break-word;
+}
+
+.wrapper,
+.wrapper > .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper > .content {
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+
+@media (max-width: 992px) {
+    .body--fixed {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+}
