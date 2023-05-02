@@ -1,5 +1,9 @@
 @import "container/index";
 @import "buttons/index";
+@import "form/index";
+@import "auth/index";
+@import "header/index";
+@import "fade";
 
 :root {
     //font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -7,18 +11,10 @@
     font-weight: 400;
 
     --white-color: #ffffff;
-    --green-color: #42b6a4;
-    --yellow-color: #ffe388;
-    --red-color: #e9504f;
-    --brown-color: #775f41;
-    --black-color: #646464;
-    --gray-color: #646464;
-    --second-color: #f6f7fb;
-    --text-color: #000832;
-    --second-text-color: #4e5370;
-    --violet-color: #ecedff;
-    --violet-color-hover: #b8bbe3;
-    --blue-color: #0020c1;
+    --main-color: #0096ff;
+    --text-color: #a7afba;
+    --gray-color: #f2f4f7;
+    --error-color: #c53f70;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;

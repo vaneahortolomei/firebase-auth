@@ -3,10 +3,14 @@
         <nav class="header__nav">
             <ul class="header__nav-list nav-list">
                 <li class="nav-list__item">
-                    <router-link :to="{ name: 'login' }">Login</router-link>
+                    <router-link class="nav-list__link" :to="{ name: 'login' }"
+                        >Login</router-link
+                    >
                 </li>
                 <li class="nav-list__item">
-                    <router-link :to="{ name: 'home' }">Home</router-link>
+                    <router-link class="nav-list__link" :to="{ name: 'home' }"
+                        >Home</router-link
+                    >
                 </li>
             </ul>
         </nav>
