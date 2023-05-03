@@ -1,0 +1,16 @@
+.user {
+    &__name {
+        color: var(--white-color);
+        font-size: 10px;
+        text-align: right;
+        @media (min-width: 768px) {
+            font-size: 14px;
+            margin-right: 15px;
+        }
+    }
+    @media (min-width: 768px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
