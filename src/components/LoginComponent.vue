@@ -91,20 +91,31 @@ const login = () => {
         .then((valid) => {
             if (valid) {
                 store
-                    .dispatch("login", {
-                        email: state.email,
-                        password: state.password,
-                    })
+                    .dispatch("login", state)
                     .then(() => {
                         key.message = "Welcome back!";
 
-                        route.push("dashboard");
+                        route.push("/");
                     })
                     .catch((e) => {
-                        if (e.response && e.response.status === 400) {
-                            key.message = "Incorrect email or password!";
-
+                        if (e.code === "auth/user-not-found") {
+                            key.message = "user-not-found";
                             timeout(2000);
+                        }
+                        if (e.code === "auth/invalid-email") {
+                            key.message = "invalid-email";
+                            timeout(2000);
+                        }
+                        if (e.code === "auth/wrong-password") {
+                            key.message = "INVALID_PASSWORD";
+                            timeout(2000);
+                        }
+                        if (e.code === "auth/email-already-in-use") {
+                            key.message = "auth/email-already-in-use";
+                            timeout(2000);
+                        }
+                        if (e.code === "auth/too-many-requests") {
+                            key.message = "TOO_MANY_ATTEMPTS_TRY_LATER";
                         }
                     });
             } else {
