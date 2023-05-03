@@ -1,6 +1,10 @@
 import { createStore } from "vuex";
-import { auth, db, usersCollection } from "../../src/includes/firebase.js";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
+import { auth } from "../../src/includes/firebase.js";
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    updateProfile,
+} from "firebase/auth";
 
 const store = createStore({
     state() {
@@ -19,39 +23,27 @@ const store = createStore({
     },
     actions: {
         async register({ commit }, payload) {
-
             const { email, password, name } = payload;
 
-            const createUser = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password,
-            );
+            await createUserWithEmailAndPassword(auth, email, password);
 
             const user = auth.currentUser;
 
             await updateProfile(user, {
-                displayName: name
+                displayName: name,
             });
 
-
-            this.commit("SET_USER", user);
-
+            commit("SET_USER", user);
 
             this.isLogged = true;
         },
         async login({ commit }, payload) {
             const { email, password } = payload;
 
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password,
-            );
+            await signInWithEmailAndPassword(auth, email, password);
             const user = auth.currentUser;
 
-
-            this.commit("SET_USER", user);
+            commit("SET_USER", user);
 
             this.isLogged = true;
         },

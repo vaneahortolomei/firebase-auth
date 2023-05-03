@@ -46,84 +46,84 @@
 </template>
 
 <script setup>
-    import Input from "../components/form/InputComponent.vue";
-    import { reactive, computed } from "vue";
-    import { useStore } from "vuex";
-    import { useRouter } from "vue-router";
-    import { useVuelidate } from "@vuelidate/core";
-    import { required, email, minLength } from "@vuelidate/validators";
-    import { inject } from "vue";
+import Input from "../components/form/InputComponent.vue";
+import { reactive, computed } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { useVuelidate } from "@vuelidate/core";
+import { required, email, minLength } from "@vuelidate/validators";
+import { inject } from "vue";
 
-    let key = inject("key");
+let key = inject("key");
 
-    const state = reactive({
-        email: "",
-        password: "",
-    });
+const state = reactive({
+    email: "",
+    password: "",
+});
 
-    const rules = computed(() => ({
-        email: {
-            required,
-            email,
-            $lazy: true,
-        },
-        password: {
-            required,
-            minLength: minLength(8),
-            $lazy: true,
-        },
-    }));
+const rules = computed(() => ({
+    email: {
+        required,
+        email,
+        $lazy: true,
+    },
+    password: {
+        required,
+        minLength: minLength(8),
+        $lazy: true,
+    },
+}));
 
-    const v$ = useVuelidate(rules, state);
+const v$ = useVuelidate(rules, state);
 
-    const store = useStore();
-    const route = useRouter();
+const store = useStore();
+const route = useRouter();
 
-    const timeout = (time) => {
-        return setTimeout(() => {
-            key.message = "";
-        }, time);
-    };
+const timeout = (time) => {
+    return setTimeout(() => {
+        key.message = "";
+    }, time);
+};
 
-    const login = () => {
-        v$.value
-            .$validate()
-            .then((valid) => {
-                if (valid) {
-                    store
-                        .dispatch("login", state)
-                        .then(() => {
-                            key.message = "Welcome back!";
+const login = () => {
+    v$.value
+        .$validate()
+        .then((valid) => {
+            if (valid) {
+                store
+                    .dispatch("login", state)
+                    .then(() => {
+                        key.message = "Welcome back!";
 
-                            route.push("/");
-                        })
-                        .catch((e) => {
-                            if (e.code === "auth/user-not-found") {
-                                key.message = "user-not-found";
-                                timeout(2000);
-                            }
-                            if (e.code === "auth/invalid-email") {
-                                key.message = "invalid-email";
-                                timeout(2000);
-                            }
-                            if (e.code === "auth/wrong-password") {
-                                key.message = "INVALID_PASSWORD";
-                                timeout(2000);
-                            }
-                            if(e.code === "auth/email-already-in-use"){
-                                key.message = "auth/email-already-in-use";
-                                timeout(2000);
-                            }
-                            if (e.code === "auth/too-many-requests") {
-                                key.message = "TOO_MANY_ATTEMPTS_TRY_LATER";
-                            }
-                        });
-                } else {
-                    throw Error("Value is required");
-                }
-            })
-            .catch(() => {
+                        route.push("/");
+                    })
+                    .catch((e) => {
+                        if (e.code === "auth/user-not-found") {
+                            key.message = "user-not-found";
+                            timeout(2000);
+                        }
+                        if (e.code === "auth/invalid-email") {
+                            key.message = "invalid-email";
+                            timeout(2000);
+                        }
+                        if (e.code === "auth/wrong-password") {
+                            key.message = "INVALID_PASSWORD";
+                            timeout(2000);
+                        }
+                        if (e.code === "auth/email-already-in-use") {
+                            key.message = "auth/email-already-in-use";
+                            timeout(2000);
+                        }
+                        if (e.code === "auth/too-many-requests") {
+                            key.message = "TOO_MANY_ATTEMPTS_TRY_LATER";
+                        }
+                    });
+            } else {
                 throw Error("Value is required");
-            });
-    };
+            }
+        })
+        .catch(() => {
+            throw Error("Value is required");
+        });
+};
 </script>
