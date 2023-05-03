@@ -117,11 +117,7 @@
             .then((valid) => {
                 if (valid) {
                     store
-                        .dispatch("register", {
-                            name: state.name,
-                            email: state.email,
-                            password: state.password,
-                        })
+                        .dispatch("register", state)
                         .then(() => {
                             key.message = "Hello User!";
                             timeout(2000);
@@ -129,10 +125,13 @@
                             route.push("/");
                         })
                         .catch((e) => {
-                            if (e.response && e.response.status === 400) {
-                                key.message = "Email already exist!";
-
+                            console.log(e.code);
+                            if(e.code === "auth/email-already-in-use"){
+                                key.message = "email-already-in-use";
                                 timeout(2000);
+                            }
+                            if (e.code === "auth/too-many-requests") {
+                                key.message = "TOO_MANY_ATTEMPTS_TRY_LATER";
                             }
                         });
                 } else {
