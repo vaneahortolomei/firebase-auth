@@ -3,7 +3,10 @@
 @import "form/index";
 @import "auth/index";
 @import "header/index";
+@import "user/index";
+@import "notification/index";
 @import "fade";
+@import "loader";
 
 :root {
     //font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

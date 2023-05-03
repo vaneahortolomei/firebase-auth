@@ -93,8 +93,8 @@ const login = () => {
                 store
                     .dispatch("login", state)
                     .then(() => {
-                        key.message = "Welcome back!";
-
+                        key.message = `Welcome back, ${state.email}!`;
+                        timeout(2000);
                         route.push("/");
                     })
                     .catch((e) => {

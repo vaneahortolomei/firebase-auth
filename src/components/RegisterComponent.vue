@@ -119,7 +119,7 @@ const register = () => {
                 store
                     .dispatch("register", state)
                     .then(() => {
-                        key.message = "Hello User!";
+                        key.message = `Hello, ${state.name}!`;
                         timeout(2000);
 
                         route.push("/");
